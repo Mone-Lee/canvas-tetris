@@ -49,5 +49,4 @@ window.onload = function() {
 			box.fill(cxt);
 		})
 	})();
-
 }
