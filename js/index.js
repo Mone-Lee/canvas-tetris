@@ -3,62 +3,50 @@ window.onload = function() {
 	let cnv = $$('canvas');
 	let cxt = cnv.getContext('2d');
 
-	// 渲染背景
-	// utils.drawBackground();
+	function paintBox(model) {
+		var map = model.map;
+		var activeBox = model.activeBox.translate(model.row, model.col);
 
-	// 定义一个用来存放方块的数组
-	let boxes = [];
-	// 定义一个“当前活动”的方块
-	let activeBox = createBox();
-	// 定义方块在y轴的下落速度
-	let vy = 20;
+		cxt.clearRect(0, 0, cnv.width, cnv.height);
+		let lines = map.lines;
+		// 游戏面板中依次绘制每一个非空的格子
+		for(let row=0; row<map.height; row++) {
+			for(let col=0; col<map.height; col++) {
+				var shape_id = lines[row][col];
+				if(shape_id !== NoShape) {
+					var y = row * Spacing;
+					var x = col * Spacing;
+					var color = Colors[shape_id];
+					cxt.fillStyle = "rgba(255, 255, 255, 0.2)";
+					cxt.fillRect(x, y, Spacing, Spacing);
+					cxt.fillStyle = color;
+					cxt.fillRect(x+1, y+1, Spacing-2, Spacing-2);
+				}
+			}
+		}
+		console.log(activeBox);
+		console.log(model.activeBox);
+		// 绘制当前方块
+		for(let i=0; i<4; i++) {
+			var y = activeBox[i].row;
+			var x = activeBox[i].col;
+			var color = model.activeBox.color;
+			cxt.fillStyle = "rgba(255, 255, 255, 0.2)";
+			cxt.fillRect(x, y, Spacing, Spacing);
+			cxt.fillStyle = color;
+			cxt.fillRect(x+1, y+1, Spacing-2, Spacing-2);
+		}
+ }
 
-	// 生成随机方块
-	function createBox(){
-		let x = Math.random() * cnv.width;
-		let y = -20;
-		let width = Math.random() * 40 + 10;	// min: 10, max: 50
-		// let height = Math.random() * 40 + 10
-		let height = 20;
-		// y = -height;
-		let color = utils.getRandomColor();
-		let box = new Box(x, y, width, height, color);
-
-		boxes.push(box);
-		return box;
+	// let model = null;
+	function start() {
+		let model = new GameModel(cnv.width / Spacing, cnv.height / Spacing);
+		paintBox(model);
 	}
 
-	let tetris = null;
-	(function frame() {
-		tetris = window.requestAnimationFrame(frame);
-		cxt.clearRect(0, 0, cnv.width, cnv.height);
+	
 
-		activeBox.y += vy;
+	start();
 
-		// 底部边界检测, 如果到达底部，则创建新方块
-		if(activeBox.y > cnv.height - activeBox.height) {
-			activeBox.y = cnv.height - activeBox.height;
-			activeBox = createBox();
-		}
-
-		// 与其他方块的碰撞检测
-		boxes.forEach((box) => {
-			box.fill(cxt);
-
-			// 如果box不是activeBox且当前box与activeBox碰撞了，则创建新方块
-			if(activeBox != box && utils.checkRect(activeBox, box)) {
-				activeBox.y = box.y - activeBox.height;
-
-				if(activeBox.y <= 0) {
-					// activeBox.fill(cxt);
-					console.log('finish');
-					window.cancelAnimationFrame(tetris);
-					return;
-				}
-					
-				activeBox = createBox();
-				// }
-			}
-		})
-	})();
+	// function()
 }

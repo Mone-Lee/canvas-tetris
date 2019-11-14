@@ -20,7 +20,7 @@ function Map(w, h) {
 Map.prototype.newLine = function() {
   var shapes = [];
   for(let j=0; j<this.width; j++) {
-    shapes[j] = noShape;
+    shapes[j] = NoShape;
   }
 
   return shapes;

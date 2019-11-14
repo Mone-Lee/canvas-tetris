@@ -6,25 +6,6 @@ function Box() {
 	this.color = '';
 }
 
-// 每一格的间距，即每一个小方块的尺寸
-Space = 20;
-
-// 各种方块形状的编号，0代表没有形状
-NoShape = 0;
-// 各种方块形状的数据描述
-Shapes = [
-	[ [0,0], [0,0], [0,0], [0,0] ],
-	[ [0,-1], [0,0], [1,0], [1,1] ],
-	[ [0,-1], [0,0], [-1,0], [-1,0] ],
-	[ [0,-1], [0,0], [0,1], [0,2] ],
-	[ [-1,0], [0,0], [1,0], [0,1] ],
-	[ [0,0], [1,0], [0,1], [1,1] ],
-	[ [-1,-1], [0,-1], [0,0], [0,1] ],
-	[ [1,-1], [0,-1], [0,0], [0,1] ]
-];
-// 各种方块形状的颜色
-Colors = ["black", "fuchsia", "#cff", "red", "orange", "aqua", "green", "yellow"];
-
 // 产生一个新的方块形状
 Box.prototype.create = function() {
 	// 随机选择一个形状方块
@@ -38,7 +19,7 @@ Box.prototype.create = function() {
 // row 表示Map中第几行
 // col 表示Map中第几列
 // 所以逻辑上应该是小方块坐标x轴对应参数col，y轴对应参数row
-Box.prototype.map = function(row, col) {
+Box.prototype.translate = function(row, col) {
 	var mapBox = [];
 	for(let i=0; i<4; i++) {
 		var temp = [];
