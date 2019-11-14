@@ -11,14 +11,16 @@ window.onload = function() {
 	// 定义一个“当前活动”的方块
 	let activeBox = createBox();
 	// 定义方块在y轴的下落速度
-	let vy = 10;
+	let vy = 20;
 
 	// 生成随机方块
 	function createBox(){
 		let x = Math.random() * cnv.width;
-		let y = 0;
+		let y = -20;
 		let width = Math.random() * 40 + 10;	// min: 10, max: 50
-		let height = Math.random() * 40 + 10;
+		// let height = Math.random() * 40 + 10
+		let height = 20;
+		// y = -height;
 		let color = utils.getRandomColor();
 		let box = new Box(x, y, width, height, color);
 
@@ -26,8 +28,9 @@ window.onload = function() {
 		return box;
 	}
 
+	let tetris = null;
 	(function frame() {
-		window.requestAnimationFrame(frame);
+		tetris = window.requestAnimationFrame(frame);
 		cxt.clearRect(0, 0, cnv.width, cnv.height);
 
 		activeBox.y += vy;
@@ -40,13 +43,22 @@ window.onload = function() {
 
 		// 与其他方块的碰撞检测
 		boxes.forEach((box) => {
+			box.fill(cxt);
+
 			// 如果box不是activeBox且当前box与activeBox碰撞了，则创建新方块
 			if(activeBox != box && utils.checkRect(activeBox, box)) {
 				activeBox.y = box.y - activeBox.height;
-				activeBox = createBox();
-			}
 
-			box.fill(cxt);
+				if(activeBox.y <= 0) {
+					// activeBox.fill(cxt);
+					console.log('finish');
+					window.cancelAnimationFrame(tetris);
+					return;
+				}
+					
+				activeBox = createBox();
+				// }
+			}
 		})
 	})();
 }
