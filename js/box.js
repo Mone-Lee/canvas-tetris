@@ -1,43 +1,33 @@
 /**
- * 构建生成随机方块
- * @param {[type]} x      方块x坐标
- * @param {[type]} y      方块y坐标
- * @param {[type]} width  方块宽度
- * @param {[type]} height 方块高度
- * @param {[type]} color  方块颜色
+ * 构建生成各种形状的方块
  */
-function Box(x, y, width, height, color) {
-	this.x = x || 0;
-	this.y = y || 0;
-	this.width =  width || 80;
-	this.height = height || 40;
-	this.color = color || '#68bfe8';
-
-	// x和y速度
-	this.vx = 0;
-	this.vy = 0;
+function Box() {
 }
 
-Box.prototype = {
-	// 绘制“描边”矩形
-	stroke: function(cxt) {
-		cxt.save();
-		cxt.strokeStyle = this.color;
-		cxt.beginPath();
-		cxt.rect(this.x, this.y, this.width, this.height);
-		cxt.closePath();
-		cxt.stroke();
-		cxt.restore();
-	},
+// 每一格的间距，即每一个小方块的尺寸
+Space = 20;
 
-	// 绘制“填充”矩形
-	fill: function(cxt) {
-		cxt.save();
-		cxt.fillStyle = this.color;
-		cxt.beginPath();
-		cxt.rect(this.x, this.y, this.width, this.height);
-		cxt.closePath()
-		cxt.fill();
-		cxt.restore();
-	}
+// 各种方块形状的编号，0代表没有形状
+NoShape = 0;
+// 各种方块形状的数据描述
+Shapes = [
+	[ [0,0], [0,0], [0,0], [0,0] ],
+	[ [0,-1], [0,0], [1,0], [1,1] ],
+	[ [0,-1], [0,0], [-1,0], [-1,0] ],
+	[ [0,-1], [0,0], [0,1], [0,2] ],
+	[ [-1,0], [0,0], [1,0], [0,1] ],
+	[ [0,0], [1,0], [0,1], [1,1] ],
+	[ [-1,-1], [0,-1], [0,0], [0,1] ],
+	[ [1,-1], [0,-1], [0,0], [0,1] ]
+];
+// 各种方块形状的颜色
+Colors = ["black", "fuchsia", "#cff", "red", "orange", "aqua", "green", "yellow"];
+
+// 产生一个新的方块形状
+Box.prototype.create = function() {
+	// 随机选择一个形状方块
+	this.shape_id = Math.floor(Math.random() * 7) + 1; //生成1~7的数
+	this.shape = Shapes[this.shape_id]; // 存储方块的形状
+	this.color = Colors[this.shape_id]; // 存储方块的颜色
 }
+
