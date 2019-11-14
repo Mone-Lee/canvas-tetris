@@ -74,7 +74,7 @@ Map.prototype.addShape = function(shape_id, shape) {
 
   // 添加新格子形状后，逐行检查是否满行，满行则消除
   for(let row=0; row<this.height; row++) {
-    if(this.isFullLine(this.lines[row])) {
+    if(this.isFullLine(row)) {
       // 绘制消除效果
       // onClearRow();
       // 将满行删除

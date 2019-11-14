@@ -22,6 +22,8 @@ const Shapes = [
 // 各种方块形状的颜色
 const Colors = ["black", "fuchsia", "#cff", "red", "orange", "aqua", "green", "yellow"];
 
+var loop_interval = null;
+
 // // 渲染格子背景
 // window.utils.drawBackground = function() {
 // 	let cnv = $$('canvas');

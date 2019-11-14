@@ -2,6 +2,7 @@
 window.onload = function() {
 	let cnv = $$('canvas');
 	let cxt = cnv.getContext('2d');
+	
 
 	function paintBox(model) {
 		var map = model.map;
@@ -24,29 +25,28 @@ window.onload = function() {
 				}
 			}
 		}
-		console.log(activeBox);
-		console.log(model.activeBox);
+
 		// 绘制当前方块
 		for(let i=0; i<4; i++) {
-			var y = activeBox[i].row;
-			var x = activeBox[i].col;
+			var y = activeBox[i].row * Spacing;
+			var x = activeBox[i].col * Spacing;
 			var color = model.activeBox.color;
 			cxt.fillStyle = "rgba(255, 255, 255, 0.2)";
 			cxt.fillRect(x, y, Spacing, Spacing);
 			cxt.fillStyle = color;
 			cxt.fillRect(x+1, y+1, Spacing-2, Spacing-2);
 		}
- }
+	}
 
-	// let model = null;
 	function start() {
 		let model = new GameModel(cnv.width / Spacing, cnv.height / Spacing);
 		paintBox(model);
+
+		loop_interval = setInterval(function() {
+			model.down();
+			paintBox(model);
+		}, 100);
 	}
 
-	
-
 	start();
-
-	// function()
 }
