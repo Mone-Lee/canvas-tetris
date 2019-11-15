@@ -5,7 +5,8 @@ window.onload = function() {
 
 	let next_box = $$('next-box');
 	let next_cxt = next_box.getContext('2d');
-	
+
+	let model = null;
 
 	function paintBox(model) {
 		var map = model.map;
@@ -54,8 +55,41 @@ window.onload = function() {
 		}
 	}
 
+	function move(which) {
+		let canMove = false;
+		switch(which) {
+			// a
+			case 97:
+				canMove = model.left();
+				if(canMove) {
+					paintBox(model);
+				}
+				break;
+			// s
+			case 115:
+				canMove = model.down();
+				if(canMove) {
+					paintBox(model);
+				}
+				break;
+			// d
+			case 100:
+				canMove = model.right();
+				if(canMove) {
+					paintBox(model);
+				}
+				break;
+		}
+	}
+
+	document.onkeypress = function(evt) {
+		console.log(evt.which);
+		evt.preventDefault();
+		move(evt.which);
+	}
+
 	function start() {
-		let model = new GameModel(cnv.width / Spacing, cnv.height / Spacing);
+		model = new GameModel(cnv.width / Spacing, cnv.height / Spacing);
 		paintBox(model);
 
 		loop_interval = setInterval(function() {

@@ -50,7 +50,35 @@ GameModel.prototype.down = function() {
     // 无法下落则将当前俄罗斯方块加入到Map中
     this.map.addShape(this.activeBox.shape_id, old);
     this.createNewBox();
-  }
 
-  // paintBox();
+    return false;
+  }else {
+    return true;
+  }
+}
+
+/* 向左移动 */
+GameModel.prototype.left = function() {
+  this.col--;
+  var temp = this.activeBox.translate(this.row, this.col);
+
+  if(this.map.isCollide(temp)) {
+    this.col++;
+    return false;
+  }else {
+    return true;
+  }
+}
+
+/* 向左移动 */
+GameModel.prototype.right = function() {
+  this.col++;
+  var temp = this.activeBox.translate(this.row, this.col);
+
+  if(this.map.isCollide(temp)) {
+    this.col--;
+    return false;
+  }else {
+    return true;
+  }
 }
