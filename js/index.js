@@ -2,6 +2,9 @@
 window.onload = function() {
 	let cnv = $$('canvas');
 	let cxt = cnv.getContext('2d');
+
+	let next_box = $$('next-box');
+	let next_cxt = next_box.getContext('2d');
 	
 
 	function paintBox(model) {
@@ -9,6 +12,7 @@ window.onload = function() {
 		var activeBox = model.activeBox.translate(model.row, model.col);
 
 		cxt.clearRect(0, 0, cnv.width, cnv.height);
+		next_cxt.clearRect(0, 0, next_box.width, next_box.height);
 		let lines = map.lines;
 		// 游戏面板中依次绘制每一个非空的格子
 		for(let row=0; row<map.height; row++) {
@@ -35,6 +39,18 @@ window.onload = function() {
 			cxt.fillRect(x, y, Spacing, Spacing);
 			cxt.fillStyle = color;
 			cxt.fillRect(x+1, y+1, Spacing-2, Spacing-2);
+		}
+
+		// 绘制下一个方块
+		let nextBox = model.nextBox.translate(2, 2); // 在预览区（2，2）处位置
+		for(let i=0; i<4; i++) {
+			var y = nextBox[i].row * Spacing;
+			var x = nextBox[i].col * Spacing;
+			var color = model.nextBox.color;
+			next_cxt.fillStyle = "rgba(255, 255, 255, 0.2)";
+			next_cxt.fillRect(x, y, Spacing, Spacing);
+			next_cxt.fillStyle = color;
+			next_cxt.fillRect(x+1, y+1, Spacing-2, Spacing-2);
 		}
 	}
 
