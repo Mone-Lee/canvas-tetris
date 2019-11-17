@@ -1,3 +1,66 @@
-body {
+.tetris-wrap {
+	position: relative;
+}
+
+.score-wrap {
+	position: absolute;
+	left: 265px;
+	top: 0;
+}
+
+.score-wrap p {
+	margin: 0;
+	width: 100px;
 	text-align: center;
+}
+
+.score-wrap .score-title {
+	font-weight: bold;
+	font-size: 18px;
+	color: #807e7e;
+}
+
+.score-wrap .score-num{
+	color: #f38b06;
+	font-weight: bold;
+}
+
+.pop-score-wrap {
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	position: absolute;
+	left: 130px;
+	top: 200px;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+
+.pop-score-show {
+	animation: pop-up 1s;
+}
+
+@keyframes pop-up {
+	0%   {
+		top: 200px;
+		transform: scale(1.05) translate(-50%, -50%);
+		opacity: 1;
+	}
+	25%  {
+		top: 196px;
+		transform: scale(1.08) translate(-50%, -50%);
+	}
+	50%  {
+		top: 193px;
+		transform: scale(1.1) translate(-50%, -50%);
+	}
+	75%  {
+		top: 191px;
+		transform: scale(1.13) translate(-50%, -50%);
+	}
+	100% {
+		top: 190px;
+		transform: scale(1.15) translate(-50%, -50%);
+		opacity: 0;
+	}
 }

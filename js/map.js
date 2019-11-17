@@ -73,14 +73,22 @@ Map.prototype.addShape = function(shape_id, shape) {
   }
 
   // 添加新格子形状后，逐行检查是否满行，满行则消除
+  let pop_score = 0;
   for(let row=0; row<this.height; row++) {
     if(this.isFullLine(row)) {
       // 绘制消除效果
       // onClearRow();
       // 将满行删除
       this.lines.splice(row, 1);
+      score += 10;
+      pop_score += 10;
       // 第一行添加新的行
       this.lines.unshift(this.newLine());
     }
+  }
+
+  if(pop_score > 0) {
+    $$('pop-score').innerHTML = pop_score;
+    $$('pop-score-wrap').className = 'pop-score-wrap pop-score-show';
   }
 }

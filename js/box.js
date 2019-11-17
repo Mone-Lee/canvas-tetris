@@ -10,6 +10,7 @@ function Box() {
 Box.prototype.create = function() {
 	// 随机选择一个形状方块
 	this.shape_id = Math.floor(Math.random() * 7) + 1; //生成1~7的数
+	// this.shape_id = 3;
 	this.shape = Shapes[this.shape_id]; // 存储方块的形状
 	this.color = Colors[this.shape_id]; // 存储方块的颜色
 }

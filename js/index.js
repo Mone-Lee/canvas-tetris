@@ -83,7 +83,6 @@ window.onload = function() {
 	}
 
 	document.onkeypress = function(evt) {
-		console.log(evt.which);
 		evt.preventDefault();
 		move(evt.which);
 	}
@@ -95,7 +94,7 @@ window.onload = function() {
 		loop_interval = setInterval(function() {
 			model.down();
 			paintBox(model);
-		}, 100);
+		}, 300);
 	}
 
 	start();

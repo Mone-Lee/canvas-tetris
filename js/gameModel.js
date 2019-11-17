@@ -26,6 +26,7 @@ GameModel.prototype.createNewBox = function() {
   this.col = Math.floor(this.map.width / 2);
   this.nextBox = new Box();
   this.nextBox.create();
+  $$('pop-score-wrap').className = 'pop-score-wrap';
 }
 
 /**
