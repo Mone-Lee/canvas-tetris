@@ -40,6 +40,16 @@ window.onload = function() {
 				model.down();
 			}
 		}, 700);
+
+		$$('start-btn').style.display = 'none';
+		$$('restart-btn').style.display = 'inline-block';
+	}
+
+	function restart() {
+		clearInterval(loop_interval);
+		score = 0;
+		waiting = false;
+		start();
 	}
 
 	function pause() {
@@ -51,8 +61,7 @@ window.onload = function() {
 		}
 	}
 
-	// start();
-
 	$$('start-btn').onclick = start;
+	$$('restart-btn').onclick = restart;
 	$$('pause-btn').onclick = pause;
 }
