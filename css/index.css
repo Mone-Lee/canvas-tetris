@@ -95,6 +95,12 @@
 	border-color: #409eff;
 }
 
+.pause-btn {
+	color: #fff;
+	background-color:#67c23a;
+	border-color:#67c23a;
+}
+
 .restart-btn {
 	color: #fff;
 	background-color: #ff4d4f;

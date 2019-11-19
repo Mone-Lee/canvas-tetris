@@ -29,6 +29,9 @@ var score = 0;
 // 游戏实例
 var model = null;
 
+// 游戏暂停控制
+var waiting = false;
+
 var cnv = $$('canvas');
 var cxt = cnv.getContext('2d');
 
