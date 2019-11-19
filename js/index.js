@@ -1,8 +1,5 @@
 // 核心流程代码
 window.onload = function() {
-
-	// let model = null;
-
 	function move(which) {
 		switch(which) {
 			// a
@@ -35,7 +32,7 @@ window.onload = function() {
 
 		loop_interval = setInterval(function() {
 			model.down();
-		}, 500);
+		}, 700);
 	}
 
 	start();
