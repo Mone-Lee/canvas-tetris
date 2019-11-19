@@ -26,6 +26,7 @@ var loop_interval = null;
 
 var score = 0;
 
+// 游戏实例
 var model = null;
 
 var cnv = $$('canvas');
@@ -34,6 +35,7 @@ var cxt = cnv.getContext('2d');
 var next_box = $$('next-box');
 var next_cxt = next_box.getContext('2d');
 
+// 绘制方块
 var paintBox = function(model) {
 	var map = model.map;
 	var activeBox = model.activeBox.translate(model.row, model.col);

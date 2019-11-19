@@ -1,5 +1,6 @@
 // 核心流程代码
 window.onload = function() {
+	
 	function move(which) {
 		switch(which) {
 			// a
@@ -27,13 +28,21 @@ window.onload = function() {
 	}
 
 	function start() {
+		clearInterval(loop_interval);
+		cxt.clearRect(0, 0, cnv.width, cnv.height);
+		next_cxt.clearRect(0, 0, next_box.width, next_box.height);
+
 		model = new GameModel(cnv.width / Spacing, cnv.height / Spacing);
 		paintBox(model);
 
 		loop_interval = setInterval(function() {
 			model.down();
 		}, 700);
+
+		$$('start-btn').className = 'ctrl-btn restart-btn';
+		$$('start-btn').innerHTML = 'restart';
 	}
 
-	start();
+	// start();
+	$$('start-btn').onclick = start;
 }
