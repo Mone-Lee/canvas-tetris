@@ -12,8 +12,6 @@ function GameModel(w, h) {
   // 下一个俄罗斯方块
   this.nextBox = new Box();
   this.nextBox.create();
-
-  // paintBox();
 }
 
 /**
@@ -52,10 +50,12 @@ GameModel.prototype.down = function() {
     this.map.addShape(this.activeBox.shape_id, old);
     this.createNewBox();
 
-    return false;
-  }else {
-    return true;
+    // return false;
+  // }else {
+    // return true;
   }
+
+  paintBox(model);
 }
 
 /* 向左移动 */
@@ -65,9 +65,9 @@ GameModel.prototype.left = function() {
 
   if(this.map.isCollide(temp)) {
     this.col++;
-    return false;
+  //   return false;
   }else {
-    return true;
+    paintBox(model);
   }
 }
 
@@ -78,8 +78,31 @@ GameModel.prototype.right = function() {
 
   if(this.map.isCollide(temp)) {
     this.col--;
-    return false;
+    // return false;
   }else {
-    return true;
+    paintBox(model);
+    // return true;
   }
+}
+
+/* 旋转变形 */
+GameModel.prototype.rotate = function() {
+  // 正方形不变形
+  if(this.activeBox.shape_id === 5) return;
+
+  // 获取旋转后的数据
+  var rotateBox = this.activeBox.rotate();
+
+  // 转换为在map上的位置
+  var temp = this.activeBox.translate(this.row, this.col);
+
+  // 如果旋转后会发生碰撞，则不旋转
+  if(this.map.isCollide(temp)) {
+    return;
+  }
+
+  // 将旋转后的数据设为当前数据
+  this.activeBox.shape = rotateBox;
+  // return true;
+  paintBox(model);
 }

@@ -31,3 +31,14 @@ Box.prototype.translate = function(row, col) {
 
 	return mapBox;
 }
+
+// 方块旋转变形,绕方块原点向右旋转，则x'=y, y'=-x
+Box.prototype.rotate = function() {
+	var copy = [[], [], [], []];
+	for(let i=0; i<4; i++) {
+		copy[i][0] = this.shape[i][1];
+		copy[i][1] = -this.shape[i][0];
+	}
+
+	return copy;
+}
