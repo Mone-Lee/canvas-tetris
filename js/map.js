@@ -88,7 +88,12 @@ Map.prototype.addShape = function(shape_id, shape) {
   }
 
   if(pop_score > 0) {
+    $$('score').innerHTML = score;
     $$('pop-score').innerHTML = pop_score;
     $$('pop-score-wrap').className = 'pop-score-wrap pop-score-show';
+
+    setTimeout(() => {
+      $$('pop-score-wrap').className = 'pop-score-wrap';
+    }, 2000);
   }
 }
