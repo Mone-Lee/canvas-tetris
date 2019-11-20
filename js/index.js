@@ -1,4 +1,7 @@
-// 核心流程代码
+/**
+ * 核心流程代码
+ */
+
 window.onload = function() {
 	
 	function move(which) {

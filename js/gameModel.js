@@ -1,6 +1,7 @@
 /**
  * 游戏逻辑类，实现游戏控制
  */
+
 function GameModel(w, h) {
   this.map = new Map(w, h);
   this.activeBox = new Box();

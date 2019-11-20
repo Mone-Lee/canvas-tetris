@@ -1,4 +1,7 @@
-// 通用方法
+/** 
+ * 通用方法
+ */
+
 const $$ = function(id) {
 	return document.getElementById(id);
 }

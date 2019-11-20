@@ -1,6 +1,7 @@
 /**
  * 构建生成各种形状的方块
  */
+
 function Box() {
 	this.shape = [];
 	this.color = '';
